@@ -43,7 +43,8 @@ Some observations:
  setting -XX:AutoBoxCacheMax=20000 instead of -XX:+AggressiveOpts. This seems to indicate that object creation is relatively expensive in this test,
  since we can make it significantly faster by avoiding creation of Integer objects.
  * Python performed worse than I expected. I was expecting it to be slower than C++ and Java, but 30x slower seems like a lot. Tips for optimizing
- the Python test would be appreciated.
+ the Python test would be appreciated. @grantjenks suggests that the python code can be made around 2x faster by avoiding the use of the integer
+ arithmetic in the main loop, as well as the method lookup for map.get(). See [this issue](https://github.com/nfergu/hashtableperf/issues/1).
 
 ## Configuration
 

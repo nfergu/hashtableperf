@@ -1,6 +1,6 @@
 # Introduction
 
-Hash table performance tests across 3 different languages: C++, Java, and Python (including Cython). For C++, the STL's
+This project tests hash table performance across 3 different languages: C++, Java, and Python (including Cython). For C++, the STL's
 [unordered_map](http://www.cplusplus.com/reference/unordered_map/unordered_map/) is used. For Java, the
 [java.util.HashMap](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html) class is used. For Python, the
 [dict type](https://docs.python.org/2/library/stdtypes.html#mapping-types-dict) is used.
@@ -61,7 +61,7 @@ g++ -otesttableperf -std=c++11 -O3 src/test_table_perf.cpp
 ```
 
 This compiles with an [optimization level](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html) of 3.
-Different optimization levels were tried. Optimization levels 2 and 3 were the fastest, but there was not a significant difference between them.
+Different optimization levels were tried. Optimization levels 2 and 3 were the fastest (but there was not a significant difference levels 2 and 3).
 
 ### Clang
 
@@ -72,7 +72,7 @@ clang++ -otesttableperf -std=c++11 -O3 src/test_table_perf.cpp
 ```
 
 This compiles with an optimization level of 3.
-Different optimization levels were tried. Optimization levels 2 and 3 were the fastest, but there was not a significant difference between them.
+Different optimization levels were tried. Optimization levels 2 and 3 were the fastest (but there was not a significant difference levels 2 and 3).
 
 ### Java
 
@@ -94,7 +94,7 @@ python interpreter.
 
 ### Cython
 
-Cython version 0.24, along with Python version 2.7.11 and GCC version 5.3.0, were used for the Cython tests. The following options were used for
+The Cython tests were performed using Cython version 0.24, along with Python version 2.7.11 and GCC version 5.3.0. The following options were used for
 Cython and GCC:
 
 ```
@@ -103,7 +103,7 @@ gcc -O3 -I /usr/include/python2.7 -o src/test_table_perf_pyx src/test_table_perf
 ```
 
 This compiles with an optimization level of 3. Other [optimization levels](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html) were tried,
-but these settings proved to be the fastest.
+but level 3 proved to be the fastest.
 
 # Running the Tests
 

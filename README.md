@@ -36,15 +36,18 @@ The following graph shows these results:
 
 Some observations:
 
+ * Python performed worse than I expected. I was expecting it to be slower than C++ and Java, but 30x slower seems like a lot.
+ One problem seems to be that integer arithmetic in Python seems to take proportionally longer: around 60% of the test time, as opposed to around
+ 17% in Java 8. See [this issue](https://github.com/nfergu/hashtableperf/issues/1), where @grantjenks suggests that the python code can be made
+ around 2x faster by avoiding the use of the integer arithmetic in the main loop. However this will presumably have implications for memory usage.
+ He also has a suggestion for avoiding the method lookup for `map.get`, which in (limited) testing seems to give a speed-up for around 5%.
+
  * We can improve the performance of Java 8 further by turning on aggressive optimizations (-XX:+AggressiveOpts).
  With this setting we get a throughput of around 53 million iterations (as opposed to 38 million iterations). This appears
  to be due to the value of the [-XX:AutoBoxCacheMax flag](http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/7-b147/java/lang/Integer.java#584):
  it is set to 20,000 instead of the default of 128 with aggressive optimizations turned on. In fact we can achieve equivalent results by
  setting -XX:AutoBoxCacheMax=20000 instead of -XX:+AggressiveOpts. This seems to indicate that object creation is relatively expensive in this test,
  since we can make it significantly faster by avoiding creation of Integer objects.
- * Python performed worse than I expected. I was expecting it to be slower than C++ and Java, but 30x slower seems like a lot. Tips for optimizing
- the Python test would be appreciated. @grantjenks suggests that the python code can be made around 2x faster by avoiding the use of the integer
- arithmetic in the main loop, as well as the method lookup for map.get(). See [this issue](https://github.com/nfergu/hashtableperf/issues/1).
 
 ## Configuration
 

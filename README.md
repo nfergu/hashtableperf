@@ -9,7 +9,9 @@ Each test repeatedly generates numbers between zero and 9999 and puts these into
 the hash table. This is repeated for one billion iterations. There is a warm-up period of one hundred million iterations before the main test.
 
 Note that the test makes no attempt to isolate has table performance from the other parts of the test, so it also tests the performance
-of loop iteration, and some numerical calculations (but we would typically expect these to be cheap compared to the cost of the map operations).
+of loop iteration, and some integer arithmetic. My assumption when designing the tests was that loop iteration and integer arithmetic would
+be cheap compared to the hash table operations. However this does not appear to be the case for some languages (like Python, for example). See
+the "Observations" section for further details.
 
 # Results
 
@@ -34,7 +36,9 @@ The following graph shows these results:
 
 ![Performance Graph](performancegraph.png "Performance Graph")
 
-Some observations:
+# Observations
+
+Some observations on the results:
 
  * Python performed worse than I expected. I was expecting it to be slower than C++ and Java, but 30x slower seems like a lot.
  One problem seems to be that integer arithmetic in Python seems to take proportionally longer: around 60% of the test time, as opposed to around
